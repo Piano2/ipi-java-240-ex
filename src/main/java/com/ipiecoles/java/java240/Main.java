@@ -1,17 +1,23 @@
 package com.ipiecoles.java.java240;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        ProduitManager pm = new ProduitManager();
-        WebPageManager webPageManager = new WebPageManager();
-        pm.setWebPageManager(webPageManager);
-        BitcoinService bitcoinService = new BitcoinService();
-        bitcoinService.setWebPageManager(webPageManager);
-        pm.setBitcoinService(bitcoinService);
+
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+        BitcoinService bitcoinService = ctx.getBean(BitcoinService.class);
+        ProduitManager pm = ctx.getBean(ProduitManager.class);
+       //WebPageManager webPageManager = new WebPageManager();
+    //    pm.setWebPageManager(webPageManager);
+        //BitcoinService bitcoinService = new BitcoinService();
+  //      bitcoinService.setWebPageManager(webPageManager);
+//        pm.setBitcoinService(bitcoinService); Injection faite dans SpringConfig
 
         System.out.println("Bienvenue !");
         while(true){
